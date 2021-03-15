@@ -1,28 +1,34 @@
 import React from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
 import { useForm } from '../../hooks/useForm'
 
 export const LoginScreen = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    const {msgError} = useSelector(state => state.ui);
 
     const [formValues, handleInputChange] = useForm({
         email: 'nando@gmail.com',
         password: '123456'
-    })
+    });
 
-    
     const {email, password} = formValues;
 
     const handleLogin = (e) => {
+
+        // if (isFormValid()){
+
+        //     return 
+        // }
         e.preventDefault();
         dispatch(startLoginEmailPassword(email, password));
     }
 
     const handleGoogleLogin = () => {
-        dispatch(startGoogleLogin())
+        dispatch(startGoogleLogin());
     }
 
 
@@ -32,6 +38,17 @@ export const LoginScreen = () => {
             <h3 className = 'auth__title'>Login</h3>
 
             <form  onSubmit = {handleLogin}  >
+
+                {
+                
+                    (msgError) &&
+                        (
+                            <div className = 'auth__alert-error'>
+                                {msgError}
+                            </div>
+                        )
+
+                }
 
                 <input
                     type = 'text'

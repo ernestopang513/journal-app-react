@@ -1,17 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
 import validator from 'validator'
-import {useDispatch} from 'react-redux'
-import { setError } from '../../actions/ui'
+import {useDispatch, useSelector} from 'react-redux'
+import { removeError, setError } from '../../actions/ui'
+import { startRegisterWithEmailPasswordName } from '../../actions/auth'
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
 
+    const {location:{pathname}} = useHistory();
+    
+
+    const {msgError} = useSelector( state => state.ui);
+
+    useEffect(() => {
+        
+        return () => {
+            dispatch(removeError());
+        }
+    }, [pathname,dispatch])
+
     const [formValues, handleInputChange] = useForm({
         name: 'Hernando',
-        email: 'namdo@gmail.com',
+        email: 'nando@gmail.com',
         password: '123456',
         password2: '123456'
     })
@@ -23,37 +36,49 @@ export const RegisterScreen = () => {
 
         if( isFormValid()) {
             
+            dispatch(startRegisterWithEmailPasswordName(email,password,name))
+                
         }
         
     }
+
     const isFormValid = () => {
 
         if(name.trim().length === 0){
             console.log('Name is required');
-            dispatch(setError('Name is required'))
+            dispatch(setError('Name is required'));
             return false;
         }else if(!validator.isEmail(email)){
             console.log('email is not valid');
+            dispatch(setError('email is not valid'));
             return false;
         }else if(password !==password2 || password.length < 5){
-            console.log('pasword is required');
+            dispatch(setError('Password must be equals and must have 6 charactes minimun'));
             return false;
         }
-
+        dispatch(removeError())
         return true;
     }
 
 
     return (
-        <>
 
+
+        <>
             <h3 className = 'auth__title'>Register</h3>
 
             <form onSubmit = {handleSubmit}>
 
-                <div className = 'auth__alert-error'>
-                    Hola mundo
-                </div>
+                {
+                
+                (msgError) &&
+                    (
+                        <div className = 'auth__alert-error'>
+                            {msgError}
+                        </div>
+                    )
+
+                }
                 <input
                     type = 'text'
                     placeholder = 'Name'
