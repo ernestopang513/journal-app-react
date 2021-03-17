@@ -16,7 +16,6 @@ export const RegisterScreen = () => {
     const {msgError} = useSelector( state => state.ui);
 
     useEffect(() => {
-        
         return () => {
             dispatch(removeError());
         }
@@ -87,7 +86,6 @@ export const RegisterScreen = () => {
                     autoComplete = 'off'
                     value = {name}
                     onChange = {handleInputChange}
-
                 />
                 <input
                     type = 'text'
