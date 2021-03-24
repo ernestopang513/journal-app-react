@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
     Redirect
   } from "react-router-dom";
   import {firebase} from '../firebase/firebaseConfig'
@@ -20,11 +19,11 @@ export const AppRouter = () => {
     const dispatch = useDispatch();
 
     const [checking, setChecking] = useState(true);
-
+    
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     useEffect(() => {
-        
+    
         firebase.auth().onAuthStateChanged( (user) =>  {
 
             if(user?.uid){
@@ -34,7 +33,6 @@ export const AppRouter = () => {
                 setIsLoggedIn(false);
             }
             setChecking(false);
-
         }  );
         
     }, [dispatch, setChecking,setIsLoggedIn]);
@@ -42,7 +40,7 @@ export const AppRouter = () => {
 
     if(checking){
         return (
-            <h1>Espere....</h1>
+            <h1>wait....</h1>
         )
     }
 
@@ -52,6 +50,7 @@ export const AppRouter = () => {
             <div>
                
                 <Switch>
+                    
                     <PublicRoute
                         path = '/auth'
                         component = {AuthRouter}
