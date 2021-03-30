@@ -2,7 +2,7 @@ import React from 'react'
 
 export const NotingSelected = () => {
     return (
-        <div className = 'nothing__main-content'>
+        <div className = 'nothing__main-content animate__animated animate__fadeIn animate__faster'>
 
             <p>
                 Select something
