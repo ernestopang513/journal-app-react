@@ -42,7 +42,7 @@ describe('Pruebas con las acciones de notes', () => {
         await store.dispatch( startNewNote());
 
         const actions = store.getActions();
-        console.log(actions);
+        // console.log(actions);
 
         expect( actions[0]).toEqual({
             type: types.notesActive,

@@ -57,7 +57,7 @@ describe('Pruebas con las acciones de Auth', () => {
         await store.dispatch( startLoginEmailPassword('test@testing.com','123456'));
 
         const actions = store.getActions();
-        console.log(actions);
+        // console.log(actions);
 
         expect(actions[1]).toEqual({
             type: types.login,

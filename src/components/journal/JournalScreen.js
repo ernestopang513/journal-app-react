@@ -12,22 +12,14 @@ export const JournalScreen = () => {
     return (
         
         <div  className = 'journal__main-content animate__animated animate__fadeIn animate__faster'>
-
             <Sidebar />
-
             <main>
-
                 {
                     (active)
                         ?  (<NoteScreen />)
                         :  (<NotingSelected/>)
                 }
-
-                       
-
-
             </main>
-
         </div>
     )
 }

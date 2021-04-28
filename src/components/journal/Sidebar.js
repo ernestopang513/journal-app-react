@@ -7,7 +7,7 @@ import { JournalEntries } from './JournalEntries'
 export const Sidebar = () => {
     const dispatch = useDispatch();
 
-    const {name} = useSelector(state => state.auth)
+    const {name} = useSelector(state => state.auth);
 
     const handleAddNew = () => {
         dispatch(startNewNote());
@@ -16,7 +16,7 @@ export const Sidebar = () => {
 
 
     const handleLogout = () => {
-        dispatch(startLogout())
+        dispatch(startLogout());
     }
     return (
         <aside className = 'Journal__sidebar'>

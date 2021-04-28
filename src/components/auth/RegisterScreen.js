@@ -44,11 +44,11 @@ export const RegisterScreen = () => {
     const isFormValid = () => {
 
         if(name.trim().length === 0){
-            console.log('Name is required');
+            // console.log('Name is required');
             dispatch(setError('Name is required'));
             return false;
         }else if(!validator.isEmail(email)){
-            console.log('email is not valid');
+            // console.log('email is not valid');
             dispatch(setError('email is not valid'));
             return false;
         }else if(password !==password2 || password.length < 5){
